@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>GaliBot – בוט הסטטיסטיקה של הקורס</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --teal-main: #0d9488;
+      --teal-soft: #14b8a6;
+      --teal-bg: #ecfeff;
+      --yellow-soft: #facc15;
+      --bg-page: #f3fafb;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border-soft: #e5e7eb;
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-page);
+      color: var(--text-main);
+      direction: rtl;
+      text-align: right;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4.5rem;
+    }
+
+    /* ===== HEADER ===== */
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .site-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .logo-wrap img {
+      max-height: 56px;
+      height: auto;
+      width: auto;
+      display: block;
+    }
+
+    /* ===== INTRO BANNER ===== */
+
+    .intro-banner {
+      background: linear-gradient(135deg, #ecfeff 0%, #fef9c3 100%);
+      padding: 1rem 1.2rem;
+      border-radius: 1rem;
+      border: 1px solid #dbeafe;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 1.6rem;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .intro-banner strong {
+      color: var(--teal-main);
+    }
+
+    /* ===== QUICK START ===== */
+
+    .quick-start {
+      background: #ffffff;
+      border-radius: 1rem;
+      border: 1px solid #dbeafe;
+      box-shadow: var(--shadow-soft);
+      padding: 1rem 1.1rem 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .quick-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .quick-title span.icon {
+      font-size: 1.25rem;
+    }
+
+    .quick-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .quick-card {
+      background: #f9fafb;
+      border-radius: 0.9rem;
+      padding: 0.7rem 0.8rem 0.9rem;
+      border: 1px solid #dbeafe;
+      position: relative;
+    }
+
+    .quick-card-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .quick-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 0.4rem;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 1.3rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--teal-main), var(--teal-soft));
+      border: none;
+      color: #ffffff;
+      font-size: 0.92rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(20, 184, 166, 0.45);
+    }
+
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1px solid #bae6fd;
+      background: #e0f2fe;
+      font-size: 0.86rem;
+      cursor: pointer;
+      color: #0f172a;
+    }
+
+    .primary-btn span.icon,
+    .ghost-btn span.icon {
+      font-size: 1.05rem;
+    }
+
+    .footnote {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+    }
+
+    /* ===== TABS ===== */
+
+    .tabs {
+      display: flex;
+      gap: 0.6rem;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      border: none;
+      background: #e0f7fa;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #0f172a;
+      transition: background 0.2s, transform 0.1s, color 0.2s;
+    }
+
+    .tab-btn span.icon {
+      font-size: 1rem;
+    }
+
+    .tab-btn.active {
+      background: var(--teal-main);
+      color: #ffffff;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-intro {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    /* ===== SECTIONS (ACCORDIONS) ===== */
+
+    .section-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 0.3rem;
+    }
+
+    .section-item {
+      background: #ffffff;
+      border-radius: 0.9rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.03);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 0.7rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .section-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .section-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .section-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .section-toggle {
+      font-size: 0.85rem;
+      border: none;
+      background: #e0f2fe;
+      color: #0f172a;
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .section-toggle span.arrow {
+      font-size: 0.9rem;
+      transform: rotate(0deg);
+      transition: transform 0.15s;
+    }
+
+    .section-item.open .section-toggle span.arrow {
+      transform: rotate(180deg);
+    }
+
+    .section-body {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 0.9rem;
+      border-top: 1px solid #f3f4f6;
+      transition: max-height 0.2s ease, padding-bottom 0.2s ease;
+    }
+
+    .section-item.open .section-body {
+      padding-bottom: 0.75rem;
+    }
+
+    .section-body-inner {
+      padding-top: 0.7rem;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: #ecfeff;
+      color: var(--teal-main);
+      margin-left: 0.35rem;
+    }
+
+    .pill.secondary {
+      background: #fef9c3;
+      color: #854d0e;
+    }
+
+    .row-block {
+      margin-bottom: 0.7rem;
+      border-bottom: 1px dashed #e5e7eb;
+      padding-bottom: 0.5rem;
+    }
+
+    .row-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .row-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .row-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    ul, ol {
+      padding-right: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.18rem;
+    }
+
+    /* ===== PROMPT BOX + COPY BUTTON ===== */
+
+    .prompt-box {
+      background: #f9fafb;
+      border-radius: 0.8rem;
+      padding: 1.4rem 0.9rem 0.8rem;
+      margin-top: 0.35rem;
+      border: 1px dashed #bae6fd;
+      position: relative;
+    }
+
+    .prompt-text {
+      font-family: "Courier New", monospace;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.4rem;
+      left: 0.5rem;
+      border: none;
+      padding: 0.24rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      background: var(--teal-main);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+    }
+
+    .copy-btn.copied {
+      background: #16a34a;
+    }
+
+    .note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .link-list {
+      font-size: 0.88rem;
+      padding-right: 1.2rem;
+    }
+
+    .link-list li a {
+      color: #2563eb;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ===== FLOATING BOT BUTTON ===== */
+
+    .floating-bot-btn {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+
+      background: linear-gradient(135deg, var(--teal-main), var(--teal-soft));
+      color: #ffffff;
+      padding: 0.55rem 1.5rem;
+      border-radius: 999px;
+      box-shadow: 0 14px 30px rgba(20, 184, 166, 0.55);
+      font-size: 0.94rem;
+      border: none;
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+    }
+
+    .floating-bot-btn .icon {
+      font-size: 1.05rem;
+    }
+
+    .floating-bot-btn:hover {
+      background: linear-gradient(135deg, #0f766e, var(--teal-main));
+    }
+
+    @media (max-width: 900px) {
+      .site-header {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+
+      .logo-wrap img {
+        max-height: 48px;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 1.25rem 0.75rem 4.3rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .intro-banner {
+        font-size: 0.92rem;
+      }
+
+      .floating-bot-btn {
+        bottom: 0.7rem;
+        width: calc(100% - 2rem);
+        justify-content: center;
+        padding-inline: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="site-title-block">
+        <h1>GaliBot – בוט הסטטיסטיקה של הקורס</h1>
+        <div class="subtitle">
+          עוזר למידה דיגיטלי המותאם במיוחד לקורס הסטטיסטיקה – כדי שתוכלו לתרגל, לשאול, להבין ולהתכונן למבחן,
+          בצורה חכמה וגמישה, בזמן שנוח לכם.
+        </div>
+      </div>
+      <div class="logo-wrap">
+        <!-- ניתן להחליף את כתובת התמונה ללוגו מעודכן במידת הצורך -->
+        <a href="https://www.ariel.ac.il" target="_blank" rel="noopener noreferrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Ariel_University_Logo.png/320px-Ariel_University_Logo.png"
+               alt="אוניברסיטת אריאל בשומרון">
+        </a>
+      </div>
+    </header>
+
+    <!-- INTRO BANNER -->
+    <section class="intro-banner">
+      GaliBot הוא חלק ממהלך חדשני של <strong>אוניברסיטת אריאל</strong> והרשות לחדשנות בהוראה:
+      שילוב של טכנולוגיית AI מתקדמת עם פדגוגיה מותאמת־סטודנט. המטרה היא לאפשר לכם
+      <strong>למידה אישית, גמישה ומבוססת תרגול</strong> – בכל שעה, מכל מקום, בקצב שלכם.
+      GaliBot אינו מחליף מרצה או תרגול, אלא מוסיף שכבת תמיכה חכמה:
+      הסברים בשפה שלכם, תרגולים בסגנון המבחן ומשוב מיידי על ההבנה.
+    </section>
+
+    <!-- QUICK START -->
+    <section class="quick-start">
+      <div class="quick-title">
+        <span class="icon">⚡</span>
+        התחלה מהירה בשלושה צעדים
+      </div>
+      <div class="quick-text">
+        לא חייבים לקרוא את כל המדריך כדי להתחיל. שלושה צעדים בסיסיים – ואתם בפנים:
+      </div>
+
+      <div class="quick-grid">
+        <!-- כרטיס 1: אימות משתמש -->
+        <div class="quick-card">
+          <div class="quick-card-title">1. אימות משתמש (כניסה ראשונה)</div>
+          <div class="quick-card-desc">
+            הודעה מוכנה לפתיחת השיחה הראשונה עם GaliBot.
+          </div>
+          <div class="prompt-box">
+            <button class="copy-btn" data-copy-target="q-auth">
+              העתק
+            </button>
+            <p id="q-auth" class="prompt-text">
+שלום, ברצוני לבצע אימות משתמש באמצעות המייל הארגוני הבא:
+[הקלידו כאן את המייל הארגוני שלכם]
+            </p>
+          </div>
+        </div>
+
+        <!-- כרטיס 2: הסבר מושג -->
+        <div class="quick-card">
+          <div class="quick-card-title">2. הסבר מושג בשפה פשוטה</div>
+          <div class="quick-card-desc">
+            מתאים כשמושג סטטיסטי “לא יושב” טוב ורוצים הסבר רגוע עם דוגמה.
+          </div>
+          <div class="prompt-box">
+            <button class="copy-btn" data-copy-target="q-explain">
+              העתק
+            </button>
+            <p id="q-explain" class="prompt-text">
+אני רוצה להבין מה זה ממוצע וסטיית תקן.
+תסביר/י לי את זה בשפה פשוטה, כאילו אני תלמיד/ה בכיתה ה',
+עם דוגמה מספרית קצרה.
+            </p>
+          </div>
+        </div>
+
+        <!-- כרטיס 3: תרגול לפני מבחן -->
+        <div class="quick-card">
+          <div class="quick-card-title">3. תרגול קצר לפני מבחן</div>
+          <div class="quick-card-desc">
+            סט שאלות קצר לחימום לפני שאתם עוברים למבחנים משנים קודמות.
+          </div>
+          <div class="prompt-box">
+            <button class="copy-btn" data-copy-target="q-exam">
+              העתק
+            </button>
+            <p id="q-exam" class="prompt-text">
+תן/י לי 8 שאלות רב-ברירה על מדדי מרכז ופיזור, ברמת קושי בינונית.
+לכל שאלה 4 מסיחים ורק תשובה אחת נכונה.
+אל תציג/י את התשובות הנכונות מיד – חכה/י לתשובות שלי ותן/י משוב מפורט אחרי כל שאלה.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <a class="primary-btn"
+           href="https://chatgpt.com/g/g-689b333011008191bcab6ca1247d485e-galibot-your-statistics-bot-ariel-university"
+           target="_blank" rel="noopener noreferrer">
+          <span class="icon">🤖</span>
+          פתיחת GaliBot
+        </a>
+        <button class="ghost-btn" type="button" data-jump-tab="prompts">
+          <span class="icon">💬</span>
+          מעבר ישיר לפרומפטים לדוגמה
+        </button>
+      </div>
+
+      <div class="footnote">
+        טיפ: אפשר לפתוח את GaliBot בטאב אחד ואת הדף הזה בטאב נוסף, ולהעתיק פרומפטים בקלות תוך כדי תרגול.
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="guide">
+        <span class="icon">📘</span>
+        מדריך שימוש
+      </button>
+      <button class="tab-btn" data-tab="prompts">
+        <span class="icon">✨</span>
+        פרומפטים והמלצות
+      </button>
+    </div>
+
+    <!-- TAB: GUIDE -->
+    <div id="tab-guide" class="tab-content active">
+      <div class="tab-intro">
+        מדריך זה מסביר בקצרה מה GaliBot יודע לעשות, איך ניגשים אליו, איך מבצעים הרשמה חד־פעמית,
+        ואיך להשתמש בו בצורה אחראית ומועילה ללמידה שלכם.
+      </div>
+
+      <div class="section-list">
+        <!-- 1 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">1. מה זה GaliBot ולמה הוא נועד?</div>
+              <div class="section-desc">עוזר למידה דיגיטלי, מותאם לקורס הסטטיסטיקה.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                GaliBot הוא <strong>עוזר למידה דיגיטלי</strong> שנבנה במיוחד עבור הסטודנטים בקורס הסטטיסטיקה.
+                הוא לא מחליף שיעור, תרגול או קריאת חומר – אלא מוסיף שכבת תמיכה:
+              </p>
+              <ul>
+                <li>שאלות חופשיות על החומר התאורטי, המצגות והתרגולים.</li>
+                <li>הסברים חלופיים ברמות קושי שונות (כולל “כמו לילד בכיתה ה’”).</li>
+                <li>תרגול שאלות בסגנון המבחן (רב־ברירה עם 4 מסיחים).</li>
+                <li>משוב מיידי על תשובותיכם וחידוד נקודות חלשות.</li>
+                <li>תרגול גם של <strong>היגיון סטטיסטי</strong> וגם של <strong>חישובים</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">2. היכן נמצא הבוט וכיצד ניגשים אליו?</div>
+              <div class="section-desc">קישור במייל + קישור קבוע ב‑Moodle.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>לבוט ניתן לגשת בשתי דרכים עיקריות:</p>
+              <ol>
+                <li><strong>קישור במייל</strong> – בתחילת הקורס תקבלו מייל רשמי עם קישור ישיר ל‑GaliBot.</li>
+                <li><strong>קישור קבוע ב‑Moodle</strong> – בדף הקורס יופיע קישור קבוע לבוט (למשל כפתור “בוט סטטיסטיקה – כניסה”).</li>
+              </ol>
+              <p>מומלץ:</p>
+              <ul>
+                <li>לשמור את הקישור במועדפים בדפדפן,</li>
+                <li>או להיכנס דרך ה‑Moodle, כדי שתמיד תדעו מאיפה להתחיל.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">3. GaliBot בתוך ChatGPT ומה הקשר למנוי?</div>
+              <div class="section-desc">GPT ייעודי שממומן על ידי האוניברסיטה – ללא תלות במנוי שלכם.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                GaliBot פועל בתוך ממשק <strong>ChatGPT</strong> של OpenAI, באזור ה‑<strong>GPTs</strong>
+                (בוטים ייעודיים מותאמים).
+              </p>
+              <p>חשוב לדעת:</p>
+              <ul>
+                <li>הבוט ממומן ומוגדר על ידי האוניברסיטה.</li>
+                <li>השימוש בו <strong>לא תלוי</strong> בסוג המנוי האישי שלכם ל‑ChatGPT.</li>
+                <li>אפשר להשתמש בו גם עם חשבון חינמי, ואין צורך במנוי Plus.</li>
+              </ul>
+              <p>
+                איכות הבוט נקבעת על ידי ההגדרות שקבעה האוניברסיטה, ולא על ידי המנוי האישי שלכם.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">4. נעיצת GaliBot בסרגל הצד של ChatGPT</div>
+              <div class="section-desc">גישה מהירה לבוט מתוך רשימת ה‑GPTs.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>כדי שיהיה לכם קל לחזור לבוט בכל רגע:</p>
+              <ol>
+                <li>היכנסו ל‑GaliBot דרך הקישור שקיבלתם או דרך ה‑Moodle.</li>
+                <li>בצד שמאל (ברשימת ה‑GPTs), מצאו את GaliBot.</li>
+                <li>לחצו על האפשרות לנעיצה / מועדף (Pin / Star / Favorite, בהתאם לממשק).</li>
+              </ol>
+              <p>לאחר הנעיצה:</p>
+              <ul>
+                <li>GaliBot יופיע קבוע בסרגל הצד.</li>
+                <li>פתיחת הבוט תהפוך ללחיצה אחת בלבד.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">5. מה GaliBot יודע לעשות?</div>
+              <div class="section-desc">חומר הקורס, רמות קושי, שאלות חדשות, הסברים ותרגולים.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>הבוט הותאם במיוחד לתכנים של הקורס:</p>
+              <ul>
+                <li>מבוסס על המצגות, הסילבוס והדגשים של המרצה.</li>
+                <li>מייצר <strong>שאלות חדשות</strong>, ולא רק תרגילים מוכרים.</li>
+              </ul>
+              <p>הוא מאפשר לכם, בין היתר:</p>
+              <ul>
+                <li>לבקש רמות קושי שונות – קל, בינוני, קשה, או לפי רמות חשיבה (ידע, הבנה, יישום, ניתוח וכו’).</li>
+                <li>לבחור דגש בין שאלות חישוביות לשאלות של היגיון והבנה תיאורטית.</li>
+                <li>להתמקד בנושא מסוים: מדדי מרכז, מדדי פיזור, התפלגויות, בחירת מבחן סטטיסטי ועוד.</li>
+              </ul>
+              <p>מה הבוט <strong>לא</strong> נועד לעשות:</p>
+              <ul>
+                <li>לא לפתור עבורכם מטלות הגשה.</li>
+                <li>לא לספק תשובות למבחן בזמן מבחן.</li>
+                <li>לא להחליף השתתפות בשיעורים ותרגולים.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">6. איך מתבצע תהליך ההרשמה?</div>
+              <div class="section-desc">אימות חד־פעמי באמצעות המייל הארגוני שלכם.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                ההרשמה לבוט היא <strong>חד־פעמית</strong> ומטרתה לוודא שאתם סטודנטים בקורס. כפתור פתיחת שיחת הרשמה אוטומטית בוטל,
+                ולכן מומלץ שאתם תיזמו את האימות.
+              </p>
+              <ol>
+                <li>
+                  <strong>כניסה לבוט</strong> – דרך הקישור במייל או בדף ה‑Moodle. הבוט נפתח כחלון צ׳אט.
+                </li>
+                <li>
+                  <strong>פתיחת השיחה בכניסה הראשונה</strong> – כבר בהודעה הראשונה כתבו משהו בסגנון:
+                  <div class="prompt-box">
+                    <button class="copy-btn" data-copy-target="g-auth">
+                      העתק
+                    </button>
+                    <p id="g-auth" class="prompt-text">
+שלום, ברצוני לבצע אימות משתמש באמצעות המייל הארגוני הבא:
+[כאן לכתוב את המייל הארגוני שלכם]
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <strong>אימות ואישור</strong> – הבוט יעביר את המייל לאימות. לאחר שתראו הודעת אישור, אינכם צריכים לחזור על התהליך.
+                </li>
+                <li>
+                  <strong>אם התחלתם שיחה בלי אימות</strong> – הבוט עלול לעצור את השיחה באמצע ולבקש מייל ארגוני.
+                  פשוט שלחו את ההודעה עם המייל והמשיכו כרגיל לאחר האישור.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">7. מה קורה בזמן ההרשמה בפועל?</div>
+              <div class="section-desc">שימוש במייל הארגוני, פרטיות ושימוש בנתונים.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>בזמן ההרשמה:</p>
+              <ul>
+                <li>המערכת שומרת את המייל הארגוני שלכם לצורך זיהוי במסגרת הקורס בלבד.</li>
+                <li>המייל משויך לשימוש בבוט לצורך גישה נוחה ודוחות אנונימיים לשיפור ההוראה.</li>
+              </ul>
+              <p>הנתונים:</p>
+              <ul>
+                <li>אינם משמשים לצרכים מסחריים.</li>
+                <li>אינם מועברים לגורמים חיצוניים שאינם קשורים לקורס ולאוניברסיטה.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">8. מתי ההרשמה מתבצעת ומה מקבלים?</div>
+              <div class="section-desc">הרשמה חד־פעמית וגישה חופשית לאורך הסמסטר.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>ההרשמה מתבצעת בפעם הראשונה שבה אתם נכנסים לבוט ומבצעים אימות מייל.</p>
+              <p>לאחר ההרשמה אתם מקבלים:</p>
+              <ul>
+                <li>גישה חופשית לבוט לאורך כל תקופת הקורס.</li>
+                <li>עבודה עם הבוט ללא צורך בהרשמה חוזרת בכל כניסה.</li>
+                <li>אפשרות להשתמש בו לפני שיעור, אחרי שיעור, ובמיוחד כהכנה למבחן.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">9. הפעלת זיכרון (Memory) ב‑ChatGPT</div>
+              <div class="section-desc">שיפור רציפות השיחה והתאמה להעדפות הלמידה שלכם.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                ניתן להפעיל את אפשרות ה‑<strong>Memory</strong> ב‑ChatGPT, כדי שהמערכת תזכור העדפות כלליות:
+                למשל שאתם סטודנטים בקורס הסטטיסטיקה, שאתם מעדיפים הסברים “שלב־אחר־שלב” ועוד.
+              </p>
+              <p>כאשר הזיכרון פעיל:</p>
+              <ul>
+                <li>לא תצטרכו להזכיר בכל שיחה מחדש את אותן העדפות.</li>
+                <li>התשובות ינסו להיות מותאמות יותר לסגנון הלמידה שלכם.</li>
+              </ul>
+              <p><strong>ההפעלה אינה חובה</strong> – מי שמעדיף/ה לעבוד בלי זיכרון יכול/ה להשתמש בבוט כרגיל.</p>
+              <p><strong>איך מפעילים?</strong></p>
+              <ol>
+                <li>נכנסים ל‑ChatGPT ומתחברים.</li>
+                <li>נכנסים ל‑Settings → Memory (או זיכרון).</li>
+                <li>מפעילים את האפשרות (On).</li>
+                <li>אפשר לשתף את המערכת בדברים שחשוב לכם שתזכור (בהסכמתכם).</li>
+                <li>ניתן בכל רגע למחוק זיכרונות או לכבות את האפשרות.</li>
+              </ol>
+              <div class="footnote">
+                שימוש בזיכרון יכול לשפר את תחושת ה"ליווי המתמשך", אבל אינו משנה את כללי ההגינות האקדמית
+                ואינו מפחית מהאחריות האישית של כל סטודנט/ית לתוצאות הלמידה.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">10. כללי שימוש, הגינות ואזהרות AI</div>
+              <div class="section-desc">מה כן לעשות עם הבוט – ומה לא.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <h4>מה מותר ומומלץ</h4>
+              <ul>
+                <li>להשתמש ב‑GaliBot להסברים, דוגמאות, תרגול וחזרה לפני מבחן.</li>
+                <li>לבקש הסברים מכמה זוויות (שפה פשוטה, הגדרה פורמלית, דוגמה מספרית וכו').</li>
+                <li>לבנות סדרת תרגילים ולקבל משוב על תשובותיכם.</li>
+                <li>להיעזר בבוט כדי לבנות תכנית תרגול אישית.</li>
+              </ul>
+
+              <h4>מה אסור / לא מומלץ</h4>
+              <ul>
+                <li>לא להשתמש בבוט להעתקת פתרונות למטלות הגשה.</li>
+                <li>לא להשתמש בו בזמן בחינה לקבלת תשובות.</li>
+                <li>לא לעקוף הנחיות מרצה או תקנון האוניברסיטה בנוגע להגינות אקדמית.</li>
+                <li>לא להגיש טקסט שהופק על ידי הבוט כפי שהוא, בלי בדיקה, התאמה ושכתוב משמעותי.</li>
+              </ul>
+
+              <h4>אזהרות כלליות לגבי AI</h4>
+              <ul>
+                <li><strong>דיוק ואמינות</strong> – גם בוט מותאם יכול לטעות. אם משהו נראה משונה, כדאי לבדוק מול החומר הרשמי או המרצה.</li>
+                <li><strong>אחריות אישית</strong> – כל מה שאתם מגישים למערכת האקדמית הוא באחריותכם בלבד.</li>
+                <li><strong>פרטיות</strong> – אין להזין לבוט מידע רגיש או אישי (נתונים רפואיים, פרטים על אחרים, סיסמאות וכו').</li>
+                <li><strong>הגינות אקדמית</strong> – GaliBot הוא כלי עזר ללמידה, לא קיצור דרך שעוקף תהליך חשיבה ולמידה אישית.</li>
+              </ul>
+
+              <div class="footnote">
+                הבוט נועד להיות <strong>שותף ללמידה</strong> – לא תחליף ללמידה.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PROMPTS -->
+    <div id="tab-prompts" class="tab-content">
+      <div class="tab-intro">
+        בחלק זה תמצאו פרומפטים לדוגמה למצבי למידה שונים – מהסבר בסיסי של מושג ועד תרגול מתקדם
+        לפי רמות חשיבה (בלום), פילוח רמות קושי, שאלות חישוביות ושאלות היגיון.
+        אפשר להעתיק כל פרומפט, להתאים לנושא שלכם ולהדביק ב‑GaliBot.
+      </div>
+
+      <div class="section-list">
+        <!-- A1 – הסבר החומר -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק א׳ – פרומפטים בסיסיים להסבר החומר
+                <span class="pill">בסיסי</span>
+              </div>
+              <div class="section-desc">כשהמושג לא ברור ורוצים הסבר פשוט עם דוגמאות.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <div class="row-block">
+                <div class="row-title">לא מבין/ה מושג בסיסי</div>
+                <div class="row-meta">מטרה: לקבל הסבר פשוט עם דוגמה.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbasic-1">העתק</button>
+                  <p id="pbasic-1" class="prompt-text">
+תסביר/י לי מה זה ממוצע וסטיית תקן בשפה פשוטה,
+כאילו אני ילד בכיתה ה'. תן/י גם דוגמה מספרית קצרה.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">מבולבל/ת מהגדרה תיאורטית</div>
+                <div class="row-meta">מטרה: הבנת התפלגות/מונח גרפי.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbasic-2">העתק</button>
+                  <p id="pbasic-2" class="prompt-text">
+אני מבולבל/ת מהמושג "התפלגות אסימטרית ימנית".
+תסביר/י לי שלב-אחר-שלב, כולל תיאור מילולי של איך זה נראה בגרף ודוגמה.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">הבדל בין מדדי מרכז</div>
+                <div class="row-meta">מטרה: להבין מתי להשתמש בממוצע/חציון/שכיח.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbasic-3">העתק</button>
+                  <p id="pbasic-3" class="prompt-text">
+תסביר/י לי את ההבדל בין ממוצע, חציון ושכיח,
+ותן/י דוגמה שבה הממוצע לא מייצג טוב את הנתונים.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">צריך רק ריענון קצר</div>
+                <div class="row-meta">מטרה: סיכום תמציתי של נושא.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbasic-4">העתק</button>
+                  <p id="pbasic-4" class="prompt-text">
+תן/י לי סיכום קצר (עד 5–6 שורות) של הנושא "מדדי פיזור",
+כולל מתי משתמשים בכל מדד.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A2 – תרגול שאלות -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק א׳ – פרומפטים בסיסיים לתרגול שאלות
+                <span class="pill">בסיסי</span>
+              </div>
+              <div class="section-desc">כשאתם רוצים פשוט לתרגל שאלות.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+
+              <div class="row-block">
+                <div class="row-title">תרגול בסגנון מבחן</div>
+                <div class="row-meta">שאלות רב־ברירה ברמת קושי בינונית.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pex-1">העתק</button>
+                  <p id="pex-1" class="prompt-text">
+תן/י לי 8 שאלות רב-ברירה בנושא מדדי מרכז ברמת קושי בינונית.
+לכל שאלה 4 מסיחים, ורק תשובה אחת נכונה.
+אל תגלה/י לי את התשובה מיד – חכה/י לתשובה שלי.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">תרגול שאלה-אחת-כל-פעם</div>
+                <div class="row-meta">מטרה: למידה הדרגתית עם משוב.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pex-2">העתק</button>
+                  <p id="pex-2" class="prompt-text">
+בוא/י נעשה תרגול הדרגתי.
+תן/י לי שאלה אחת בכל פעם בנושא חישוב ממוצע וסטיית תקן.
+חכה/י לתשובה שלי, ואז:
+1. תגיד/י אם צדקתי או טעיתי,
+2. תסביר/י את הדרך לפתרון,
+3. אם טעיתי – תסביר/י איפה הייתה הטעות.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">אימון על קריאת פלט SPSS</div>
+                <div class="row-meta">מטרה: ללמוד להבין פלטים.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pex-3">העתק</button>
+                  <p id="pex-3" class="prompt-text">
+אני רוצה לתרגל קריאה של פלט SPSS.
+תאר/י לי פלט דמיוני קצר (למשל של מבחן t או טבלת שכיחויות),
+תשאל/י שאלה על הפלט, תחכה/י לתשובה שלי ורק אחר כך תיתן/י משוב והסבר.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">חיזוק חישובים "יבשים"</div>
+                <div class="row-meta">מטרה: לתרגל חישוב מדדים מספריים.</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pex-4">העתק</button>
+                  <p id="pex-4" class="prompt-text">
+תן/י לי 5 קבוצות נתונים קטנות (5–7 מספרים כל קבוצה),
+ותבקש/י ממני לחשב ממוצע, חציון וסטיית תקן לכל קבוצה.
+אחרי כל קבוצה תן/י לי את הפתרון המלא, כדי שאוכל להשוות.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A3 – רמת קושי -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק א׳ – בקשת רמת קושי
+                <span class="pill">בסיסי</span>
+              </div>
+              <div class="section-desc">עוזר להכווין את החומר לרמה המתאימה לכם.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <div class="row-block">
+                <div class="row-title">אני די חלש/ה בסטטיסטיקה</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="p-level-1">העתק</button>
+                  <p id="p-level-1" class="prompt-text">
+אני חלש/ה בסטטיסטיקה.
+תן/י לי 5 שאלות קלות בנושא ממוצע וחציון,
+עם הסבר מפורט אחרי כל שאלה.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">אני ברמה בינונית ורוצה להשתפר</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="p-level-2">העתק</button>
+                  <p id="p-level-2" class="prompt-text">
+אני מרגיש/ה שאני ברמה סבירה ורוצה להשתפר.
+תן/י לי 7 שאלות ברמת קושי בינונית בנושא סטיית תקן ופיזור,
+כולל משוב אחרי כל שאלה.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">אני מחפש/ת אתגר</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="p-level-3">העתק</button>
+                  <p id="p-level-3" class="prompt-text">
+אני רוצה אתגר.
+תן/י לי 5 תרגילים קשים שמשלבים גם הבנה מושגית וגם חישובים,
+בנושא התפלגויות ומדדי פיזור.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A4 – טיפים קצרים -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק א׳ – טיפים בסיסיים לניסוח פרומפט
+                <span class="pill secondary">טיפים</span>
+              </div>
+              <div class="section-desc">כמה עקרונות שיעזרו לכל פרומפט לעבוד טוב יותר.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <ul>
+                <li><strong>להיות ספציפיים</strong> – לכתוב בדיוק איזה נושא ואיזה סוג עזרה אתם רוצים.</li>
+                <li><strong>להגדיר פורמט תשובה</strong> – למשל “תענה/י בשלבים ממוספרים”, “בסוף תן/י סיכום קצר”.</li>
+                <li><strong>לתאר את רמת הידע</strong> – “אני בתחילת הקורס…”, “אני מרגיש/ה ברמה בינונית…”.</li>
+                <li><strong>לתת חיווי</strong> – אם התשובה לא מדויקת למה שרציתם, לכתוב:
+                  “זה לא בדיוק מה שהתכוונתי, תתמקד/י יותר ב…”.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- B1 – בלום -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק ב׳ – רמות חשיבה לפי טקסונומיית בלום
+                <span class="pill">מתקדם</span>
+              </div>
+              <div class="section-desc">שאלות לפי: ידע, הבנה, יישום, ניתוח, סינתזה, הערכה.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <div class="row-block">
+                <div class="row-title">ידע – בדיקת הגדרות</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbloom-1">העתק</button>
+                  <p id="pbloom-1" class="prompt-text">
+בנה/י לי 5 שאלות קצרות ברמת ידע על הנושא "מדדי מרכז",
+שמתמקדות בהגדרות בסיסיות (מה זה ממוצע, חציון, שכיח).
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">הבנה – הסבר במילים שלכם</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbloom-2">העתק</button>
+                  <p id="pbloom-2" class="prompt-text">
+תן/י לי 4 שאלות ברמת הבנה,
+שבהן אני צריך/ה להסביר במילים שלי מה משמעות סטיית תקן גבוהה או נמוכה,
+ולקבל משוב על ההסבר.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">יישום – שימוש בנוסחאות במצב חדש</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbloom-3">העתק</button>
+                  <p id="pbloom-3" class="prompt-text">
+תן/י לי 3 תרגילים ברמת יישום,
+שבהם יש טבלת נתונים חדשה ואני צריכ/ה לבחור ולהפעיל את הנוסחה המתאימה
+(מדדי מרכז/פיזור).
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">ניתוח – השוואת התפלגויות</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbloom-4">העתק</button>
+                  <p id="pbloom-4" class="prompt-text">
+תן/י לי 3 שאלות ברמת ניתוח,
+שמשוות בין שתי התפלגויות שונות (למשל שתי כיתות),
+ואני צריכ/ה להסביר מי יותר הומוגנית, מי יותר מפוזרת, ומה מסקנותיי.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">סינתזה – יצירת ייצוג חדש לנתונים</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbloom-5">העתק</button>
+                  <p id="pbloom-5" class="prompt-text">
+תן/י לי תרגיל אחד ברמת סינתזה,
+שבו אני צריכ/ה להציע דרך חדשה להציג נתונים (טבלה/גרף)
+ולהסביר למה זה מתאים.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">הערכה – שיפוט של ניתוח קיים</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pbloom-6">העתק</button>
+                  <p id="pbloom-6" class="prompt-text">
+תן/י לי 2 שאלות ברמת הערכה,
+שבהן מציגים לי ניתוח סטטיסטי שבוצע,
+ואני צריכ/ה לשפוט אם הבחירה במדדים/במבחן הסטטיסטי הייתה טובה,
+ולהסביר למה.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B2 – פילוח קושי -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק ב׳ – פילוח רמות קושי ושאלות חישוביות/היגיון
+                <span class="pill">מתקדם</span>
+              </div>
+              <div class="section-desc">לבנייה של סטים גדולים של שאלות.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <div class="row-block">
+                <div class="row-title">סט בחינה עם חלוקת אחוזים</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pdist-1">העתק</button>
+                  <p id="pdist-1" class="prompt-text">
+בנה/י עבורי 20 שאלות בפורמט בחינה על חומר הסטטיסטיקה של הקורס,
+לפי הפילוח הבא:
+20% שאלות קלות, 30% שאלות ברמת קושי בינונית,
+40% שאלות ברמת קושי קשה, 10% שאלות ברמת קושי קשה מאוד.
+בנוסף, 50% מהשאלות יתמקדו בהיגיון והבנה תיאורטית,
+ו-50% יהיו שאלות חישוביות.
+לכל השאלות: רב-ברירה, 4 מסיחים, תשובה אחת נכונה.
+אל תציג/י את התשובות הנכונות מיד – חכה/י לתשובות שלי ותן/י משוב מפורט.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">חצי–חצי היגיון / חישוב</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pdist-2">העתק</button>
+                  <p id="pdist-2" class="prompt-text">
+תן/י לי 12 שאלות תרגול על החומר של הפרק,
+כך ש-50% מהשאלות הן היגיון והבנה תיאורטית
+(בחירת מבחן, פרשנות תוצאות, הסברים),
+ו-50% הן שאלות חישוביות
+(מדדי מרכז, פיזור, Z וכו').
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B3 – היגיון סטטיסטי -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק ב׳ – תרגול היגיון סטטיסטי
+                <span class="pill">מתקדם</span>
+              </div>
+              <div class="section-desc">לא רק נוסחאות – גם להבין מה המספרים אומרים.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+
+              <div class="row-block">
+                <div class="row-title">משמעות סטיית תקן</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="plogic-1">העתק</button>
+                  <p id="plogic-1" class="prompt-text">
+תן/י לי 3 שאלות פתוחות קצרות שבודקות הבנה
+של מה המשמעות של סטיית תקן גבוהה לעומת נמוכה.
+אחרי כל תשובה שלי תן/י משוב אם ההיגיון נכון ותסביר/י.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">בחירת מדד מתאים</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="plogic-2">העתק</button>
+                  <p id="plogic-2" class="prompt-text">
+תן/י לי 4 תרגילים שבהם מוצגים נתונים על כיתה/אוכלוסייה,
+ואני צריכ/ה לבחור איזה מדד מרכז הכי מתאים ולנמק.
+חכה/י לתשובות שלי ואז תן/י משוב.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">בדיקת טענות על התפלגויות</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="plogic-3">העתק</button>
+                  <p id="plogic-3" class="prompt-text">
+תן/י לי 5 טענות על התפלגויות (סימטרית/אסימטרית, זנב ימני/שמאלי),
+ואני אכתוב אם הן נכונות או לא ומדוע.
+תן/י משוב מפורט על ההסברים שלי.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B4 – סדר ניתוח סטטיסטי -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק ב׳ – סדר הפעולות בניתוח סטטיסטי במחקר
+                <span class="pill">מתקדם</span>
+              </div>
+              <div class="section-desc">עוזר להבין את ה"סיפור" של הניתוח.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <div class="row-block">
+                <div class="row-title">הסדר ההגיוני הכללי</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="porder-1">העתק</button>
+                  <p id="porder-1" class="prompt-text">
+תסכם/י לי מהו סדר הפעולות ההגיוני בניתוח סטטיסטי של מחקר אקדמי טיפוסי:
+מה עושים קודם, מה אחר כך, ומה לבסוף.
+תן/י את זה כשלבים מסודרים, כולל משפט הסבר קצר לכל שלב
+(מבנה נתונים, סטטיסטיקה תיאורית, בדיקת הנחות, בחירת מבחנים, בדיקת השערות).
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">תרגול בחירת מבחנים</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="porder-2">העתק</button>
+                  <p id="porder-2" class="prompt-text">
+תן/י לי 5 תרחישים קצרים של מחקרים
+(סוג משתנים, סולמות מדידה, שאלת מחקר).
+בכל תרחיש אני אצטרך לבחור איזה מבחן סטטיסטי מתאים
+(כולל אם הוא פרמטרי או א-פרמטרי).
+חכה/י לתשובה שלי ואז תן/י הסבר מפורט לבחירה הנכונה.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B5 – פרמטרי / א-פרמטרי -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק ב׳ – פרמטרי מול א-פרמטרי
+                <span class="pill">מתקדם</span>
+              </div>
+              <div class="section-desc">הבנה ותרגול בחירת סוג המבחן.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <div class="row-block">
+                <div class="row-title">הסבר מושגי</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pparam-1">העתק</button>
+                  <p id="pparam-1" class="prompt-text">
+תסביר/י לי את ההבדל בין מבחנים פרמטריים ומבחנים א-פרמטריים:
+בשפה פשוטה, כולל דוגמאות למבחנים מכל סוג,
+והקשר לסולם המדידה (נומינלי, סדרי, רווח)
+ולהנחות על התפלגות המשתנה.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">תרגול בחירת סוג מבחן</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pparam-2">העתק</button>
+                  <p id="pparam-2" class="prompt-text">
+תן/י לי 8 תרחישים קצרים של מחקרים
+(למשל השוואת שתי קבוצות, השוואת שלוש קבוצות, קשר בין שני משתנים).
+לכל תרחיש: תתאר/י את סוג המשתנים וסולם המדידה,
+ואני אצטרך לבחור האם מתאים מבחן פרמטרי או א-פרמטרי, ואיזה מבחן.
+חכה/י לתשובה שלי ואז תן/י משוב.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B6 – בוט כבוחן פתרונות -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                חלק ב׳ – שימוש בבוט כבוחן פתרונות
+                <span class="pill secondary">טיפים</span>
+              </div>
+              <div class="section-desc">לתת לבוט לבדוק אתכם – אבל לא לפתור במקומכם.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <div class="row-block">
+                <div class="row-title">בדיקת פתרון שכתבתם לבד</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pcheck-1">העתק</button>
+                  <p id="pcheck-1" class="prompt-text">
+הנה פתרון שאני כתבתי לשאלה סטטיסטית
+(אעתיק לך את השאלה ואת הפתרון שלי).
+תבדוק/י אם הפתרון שלי נכון, ואם לא – תסביר/י מה הטעות
+ותראה/י לי איך לכתוב את הפתרון בצורה מדויקת יותר.
+                  </p>
+                </div>
+              </div>
+
+              <div class="row-block">
+                <div class="row-title">שיפור ניסוח בתשובה מילולית</div>
+                <div class="prompt-box">
+                  <button class="copy-btn" data-copy-target="pcheck-2">העתק</button>
+                  <p id="pcheck-2" class="prompt-text">
+כתבתי הסבר מילולי לתוצאות של מחקר קטן.
+אעתיק לך את ההסבר שלי.
+תן/י לי משוב: האם ההסבר מדויק סטטיסטית? האם הוא ברור?
+ומה אפשר לשפר בניסוח?
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B7 – שלד פרומפט -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                13. שלד פרומפט – איך כותבים פרומפט טוב?
+                <span class="pill secondary">טיפים</span>
+              </div>
+              <div class="section-desc">תבנית קצרה שאפשר להשתמש בה כמעט לכל נושא.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                ב‑GaliBot אין צורך להסביר לבוט מה התפקיד שלו – הוא כבר “מבין” שהוא בוט סטטיסטיקה.
+                מה שכן חשוב הוא להסביר <strong>מה אתם רוצים</strong> ממנו.
+              </p>
+              <p>אפשר לחשוב על פרומפט במבנה הבא:</p>
+              <div class="prompt-box">
+                <p class="prompt-text">
+[מה אני רוצה לעשות] + [על איזה נושא/פרק] + [באיזה פורמט תשובה] + [רמת קושי / סוג שאלות] + [הנחיות מיוחדות]
+                </p>
+              </div>
+
+              <p>דוגמה – תרגול חישובי:</p>
+              <div class="prompt-box">
+                <button class="copy-btn" data-copy-target="pskel-1">העתק</button>
+                <p id="pskel-1" class="prompt-text">
+המטרה שלי היא לתרגל חישוב סטיית תקן על ציוני מבחן.
+תן/י לי 5 שאלות רב־ברירה עם 4 מסיחים לכל שאלה, ברמת קושי בינונית.
+אחרי כל שאלה חכה/י לתשובה שלי ורק אז תגיד/י אם צדקתי ותסביר/י את הדרך.
+                </p>
+              </div>
+
+              <p>דוגמה – הסבר מושגי בשפה פשוטה:</p>
+              <div class="prompt-box">
+                <button class="copy-btn" data-copy-target="pskel-2">העתק</button>
+                <p id="pskel-2" class="prompt-text">
+אני רוצה להבין מה זה התפלגות אסימטרית ימנית.
+תסביר/י לי שלב־אחר־שלב, בשפה פשוטה (אפשר "כמו לילד בן 10"),
+עם דוגמה מספרית אחת ודימוי מחיי היום־יום.
+בסוף תסכם/י את העיקר ב-3 שורות.
+                </p>
+              </div>
+
+              <p>גרסת “מינימום” לפני כל פרומפט:</p>
+              <ul>
+                <li>מה אני רוצה ללמוד / לתרגל?</li>
+                <li>על איזה נושא או פרק?</li>
+                <li>איך אני רוצה שהבוט יעזור לי? (הסבר / שאלות / משוב / דוגמאות)</li>
+                <li>איך אני רוצה שהתשובה תיראה? (קצר / ארוך / בשלבים / עם או בלי פתרון מידי)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- B8 – קישורים חיצוניים -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">
+                14. קישורים ללמידה על כתיבת פרומפטים (למתעניינים)
+                <span class="pill secondary">רשות</span>
+              </div>
+              <div class="section-desc">לא חובה לקורס, אבל מעניין למי שרוצה להעמיק.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <ul class="link-list">
+                <li>
+                  <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener noreferrer">
+                    OpenAI – Prompt Engineering Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="https://learnprompting.org" target="_blank" rel="noopener noreferrer">
+                    Learn Prompting
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.promptingguide.ai" target="_blank" rel="noopener noreferrer">
+                    Prompting Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="https://flowgpt.com" target="_blank" rel="noopener noreferrer">
+                    FlowGPT – ספריית פרומפטים
+                  </a>
+                </li>
+                <li>
+                  <a href="https://grow.google/prompting-essentials/" target="_blank" rel="noopener noreferrer">
+                    Google – Prompting Essentials
+                  </a>
+                </li>
+              </ul>
+              <p class="note">
+                אין חובה להשתמש בכלים הללו לצורך העבודה עם GaliBot – הם מיועדים למי שרוצה להעמיק
+                בכתיבת פרומפטים גם מעבר לקורס.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- כפתור צף לפתיחת הבוט – תמיד זמין -->
+  <a href="https://chatgpt.com/g/g-689b333011008191bcab6ca1247d485e-galibot-your-statistics-bot-ariel-university"
+     class="floating-bot-btn"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="icon">🤖</span>
+    לפתוח את GaliBot עכשיו
+  </a>
+
+  <script>
+    // Tabs
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-tab");
+
+        tabButtons.forEach(b => b.classList.remove("active"));
+        tabContents.forEach(c => c.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById("tab-" + target).classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    // Jump button from quick-start to prompts tab
+    document.querySelectorAll("[data-jump-tab]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-jump-tab");
+        const tabBtn = document.querySelector('.tab-btn[data-tab="' + target + '"]');
+        if (tabBtn) tabBtn.click();
+      });
+    });
+
+    // Accordions
+    document.querySelectorAll(".section-item").forEach(item => {
+      const header = item.querySelector(".section-header");
+      const toggleBtn = item.querySelector(".section-toggle");
+      const body = item.querySelector(".section-body");
+
+      const toggle = (event) => {
+        if (event && event.target.closest(".copy-btn")) return;
+
+        const isOpen = item.classList.contains("open");
+        if (isOpen) {
+          item.classList.remove("open");
+          body.style.maxHeight = "0px";
+        } else {
+          item.classList.add("open");
+          body.style.maxHeight = body.scrollHeight + "px";
+        }
+      };
+
+      header.addEventListener("click", toggle);
+      toggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggle(e);
+      });
+    });
+
+    // Copy buttons
+    const copyButtons = document.querySelectorAll(".copy-btn");
+
+    copyButtons.forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const targetId = btn.getAttribute("data-copy-target");
+        const el = document.getElementById(targetId);
+        const text = (el && el.innerText) ? el.innerText.trim() : "";
+
+        if (!text) return;
+
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.classList.add("copied");
+          btn.textContent = "הועתק ✓";
+          setTimeout(() => {
+            btn.classList.remove("copied");
+            btn.textContent = "העתק";
+          }, 1600);
+        } catch (err) {
+          alert("לא הצלחתי להעתיק. אפשר לסמן ולהעתיק ידנית.");
+        }
+      });
+    });
+
+    // עדכון גובה מקסימלי בעת שינוי גודל חלון – בשביל אקורדיונים פתוחים
+    window.addEventListener("resize", () => {
+      document.querySelectorAll(".section-item.open .section-body").forEach(body => {
+        body.style.maxHeight = body.scrollHeight + "px";
+      });
+    });
+  </script>
+</body>
+</html>
