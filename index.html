@@ -533,6 +533,17 @@
       <strong>למידה אישית, גמישה ומבוססת תרגול</strong> – בכל שעה, מכל מקום, בקצב שלכם.
       GaliBot אינו מחליף מרצה או תרגול, אלא מוסיף שכבת תמיכה חכמה:
       הסברים בשפה שלכם, תרגולים בסגנון המבחן ומשוב מיידי על ההבנה.
+
+      <br><br>
+      <strong>כדי להתחיל להשתמש ב-GaliBot יש להזדהות עם המייל הארגוני שלכם.</strong>
+      ניתן להעתיק את ההודעה הבאה כהודעה ראשונה לבוט:
+      <div class="prompt-box">
+        <button class="copy-btn" data-copy-target="intro-auth">העתק</button>
+        <p id="intro-auth" class="prompt-text">
+שלום, ברצוני לבצע אימות משתמש באמצעות המייל הארגוני הבא:
+[כאן לכתוב את המייל הארגוני שלכם]
+        </p>
+      </div>
     </section>
 
     <!-- QUICK START -->
@@ -567,15 +578,15 @@
         <div class="quick-card">
           <div class="quick-card-title">2. הסבר מושג בשפה פשוטה</div>
           <div class="quick-card-desc">
-            מתאים כשמושג סטטיסטי “לא יושב” טוב ורוצים הסבר רגוע עם דוגמה.
+            אם לא הבנתם מושג או נושא בקורס – העתיקו את הפרומפט הבא והחליפו את הטקסט בסוגריים המרובעים לנושא שלכם.
           </div>
           <div class="prompt-box">
             <button class="copy-btn" data-copy-target="q-explain">
               העתק
             </button>
             <p id="q-explain" class="prompt-text">
-אני רוצה להבין מה זה ממוצע וסטיית תקן.
-תסביר/י לי את זה בשפה פשוטה, כאילו אני תלמיד/ה בכיתה ה',
+אני רוצה להבין טוב יותר את נושא [ממוצע וסטיית תקן].
+תסביר/י לי את זה בשפה פשוטה,
 עם דוגמה מספרית קצרה.
             </p>
           </div>
@@ -592,7 +603,7 @@
               העתק
             </button>
             <p id="q-exam" class="prompt-text">
-תן/י לי 8 שאלות רב-ברירה על מדדי מרכז ופיזור, ברמת קושי בינונית.
+תן/י לי 8 שאלות רב-ברירה על [מדדי מרכז ופיזור], ברמת קושי בינונית.
 לכל שאלה 4 מסיחים ורק תשובה אחת נכונה.
 אל תציג/י את התשובות הנכונות מיד – חכה/י לתשובות שלי ותן/י משוב מפורט אחרי כל שאלה.
             </p>
@@ -638,127 +649,11 @@
       </div>
 
       <div class="section-list">
-        <!-- 1 -->
+        <!-- 1 – מה הבוט יודע/לא יודע -->
         <div class="section-item">
           <div class="section-header">
             <div class="section-info">
-              <div class="section-title">1. מה זה GaliBot ולמה הוא נועד?</div>
-              <div class="section-desc">עוזר למידה דיגיטלי, מותאם לקורס הסטטיסטיקה.</div>
-            </div>
-            <button class="section-toggle" type="button">
-              פרטים
-              <span class="arrow">▼</span>
-            </button>
-          </div>
-          <div class="section-body">
-            <div class="section-body-inner">
-              <p>
-                GaliBot הוא <strong>עוזר למידה דיגיטלי</strong> שנבנה במיוחד עבור הסטודנטים בקורס הסטטיסטיקה.
-                הוא לא מחליף שיעור, תרגול או קריאת חומר – אלא מוסיף שכבת תמיכה:
-              </p>
-              <ul>
-                <li>שאלות חופשיות על החומר התאורטי, המצגות והתרגולים.</li>
-                <li>הסברים חלופיים ברמות קושי שונות (כולל “כמו לילד בכיתה ה’”).</li>
-                <li>תרגול שאלות בסגנון המבחן (רב־ברירה עם 4 מסיחים).</li>
-                <li>משוב מיידי על תשובותיכם וחידוד נקודות חלשות.</li>
-                <li>תרגול גם של <strong>היגיון סטטיסטי</strong> וגם של <strong>חישובים</strong>.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="section-item">
-          <div class="section-header">
-            <div class="section-info">
-              <div class="section-title">2. היכן נמצא הבוט וכיצד ניגשים אליו?</div>
-              <div class="section-desc">קישור במייל + קישור קבוע ב-Moodle.</div>
-            </div>
-            <button class="section-toggle" type="button">
-              פרטים
-              <span class="arrow">▼</span>
-            </button>
-          </div>
-          <div class="section-body">
-            <div class="section-body-inner">
-              <p>לבוט ניתן לגשת בשתי דרכים עיקריות:</p>
-              <ol>
-                <li><strong>קישור במייל</strong> – בתחילת הקורס תקבלו מייל רשמי עם קישור ישיר ל-GaliBot.</li>
-                <li><strong>קישור קבוע ב-Moodle</strong> – בדף הקורס יופיע קישור קבוע לבוט (למשל כפתור “בוט סטטיסטיקה – כניסה”).</li>
-              </ol>
-              <p>מומלץ:</p>
-              <ul>
-                <li>לשמור את הקישור במועדפים בדפדפן,</li>
-                <li>או להיכנס דרך ה-Moodle, כדי שתמיד תדעו מאיפה להתחיל.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="section-item">
-          <div class="section-header">
-            <div class="section-info">
-              <div class="section-title">3. GaliBot בתוך ChatGPT ומה הקשר למנוי?</div>
-              <div class="section-desc">GPT ייעודי לקורס מבוא לסטטיסטיקה– ללא תלות במנוי שלכם.</div>
-            </div>
-            <button class="section-toggle" type="button">
-              פרטים
-              <span class="arrow">▼</span>
-            </button>
-          </div>
-          <div class="section-body">
-            <div class="section-body-inner">
-              <p>
-                GaliBot פועל בתוך ממשק <strong>ChatGPT</strong> של OpenAI, באזור ה-<strong>GPTs</strong>
-                (בוטים ייעודיים מותאמים).
-              </p>
-              <p>חשוב לדעת:</p>
-              <ul>
-                <li>השימוש בו <strong>לא תלוי</strong> בסוג המנוי האישי שלכם ל-ChatGPT.</li>
-                <li>אפשר להשתמש בו גם עם חשבון חינמי, ואין צורך במנוי Plus.</li>
-              </ul>
-              <p>
-                 השימוש בבוט הוא רק בנושאי וצורכי הקורס.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="section-item">
-          <div class="section-header">
-            <div class="section-info">
-              <div class="section-title">4. נעיצת GaliBot בסרגל הצד של ChatGPT</div>
-              <div class="section-desc">גישה מהירה לבוט מתוך רשימת ה-GPTs.</div>
-            </div>
-            <button class="section-toggle" type="button">
-              פרטים
-              <span class="arrow">▼</span>
-            </button>
-          </div>
-          <div class="section-body">
-            <div class="section-body-inner">
-              <p>כדי שיהיה לכם קל לחזור לבוט בכל רגע:</p>
-              <ol>
-                <li>היכנסו ל-GaliBot דרך הקישור שקיבלתם או דרך ה-Moodle.</li>
-                <li>בצד שמאל (ברשימת ה-GPTs), מצאו את GaliBot.</li>
-                <li>לחצו על האפשרות לנעיצה / מועדף (Pin / Star / Favorite, בהתאם לממשק).</li>
-              </ol>
-              <p>לאחר הנעיצה:</p>
-              <ul>
-                <li>GaliBot יופיע קבוע בסרגל הצד.</li>
-                <li>פתיחת הבוט תהפוך ללחיצה אחת בלבד.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5 -->
-        <div class="section-item">
-          <div class="section-header">
-            <div class="section-info">
-              <div class="section-title">5. מה GaliBot יודע לעשות?</div>
+              <div class="section-title">1. מה GaliBot יודע ולא יודע לעשות?</div>
               <div class="section-desc">חומר הקורס, רמות קושי, שאלות חדשות, הסברים ותרגולים.</div>
             </div>
             <button class="section-toggle" type="button">
@@ -768,6 +663,10 @@
           </div>
           <div class="section-body">
             <div class="section-body-inner">
+              <p>
+                GaliBot נועד <strong>לסייע לכם ללמוד את הקורס ולהגיע מוכנים לבחינה</strong> –
+                דרך תרגול החומר, קבלת הסברים על נושאים שלא היו ברורים וחיזוק ההיגיון הסטטיסטי.
+              </p>
               <p>הבוט הותאם במיוחד לתכנים של הקורס:</p>
               <ul>
                 <li>מבוסס על המצגות, הסילבוס והדגשים של המרצה.</li>
@@ -776,24 +675,25 @@
               <p>הוא מאפשר לכם, בין היתר:</p>
               <ul>
                 <li>לבקש רמות קושי שונות – קל, בינוני, קשה, או לפי רמות חשיבה (ידע, הבנה, יישום, ניתוח וכו’).</li>
+                <li>הסברים חלופיים ברמות קושי שונות – החל מהסבר בסיסי (כמו לתלמיד/ת תיכון) ועד רמה אקדמית מתקדמת.</li>
                 <li>לבחור דגש בין שאלות חישוביות לשאלות של היגיון והבנה תיאורטית.</li>
                 <li>להתמקד בנושא מסוים: מדדי מרכז, מדדי פיזור, התפלגויות, בחירת מבחן סטטיסטי ועוד.</li>
               </ul>
               <p>מה הבוט <strong>לא</strong> נועד לעשות:</p>
               <ul>
-                <li>לא לפתור עבורכם מטלות הגשה.</li>
-                <li>לא לספק תשובות למבחן בזמן מבחן.</li>
+                <li>לא לפתור עבורכם מטלות הגשה – חשוב שתפתרו בעצמכם כדי לפתח את החשיבה הסטטיסטית.</li>
+                <li>לא לספק תשובות למבחן בזמן בחינה.</li>
                 <li>לא להחליף השתתפות בשיעורים ותרגולים.</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- 6 -->
+        <!-- 2 – תהליך ההרשמה -->
         <div class="section-item">
           <div class="section-header">
             <div class="section-info">
-              <div class="section-title">6. איך מתבצע תהליך ההרשמה?</div>
+              <div class="section-title">2. איך מתבצע תהליך ההרשמה?</div>
               <div class="section-desc">אימות חד־פעמי באמצעות המייל הארגוני שלכם.</div>
             </div>
             <button class="section-toggle" type="button">
@@ -804,8 +704,9 @@
           <div class="section-body">
             <div class="section-body-inner">
               <p>
-                ההרשמה לבוט היא <strong> חד־פעמית</strong> ומטרתה לוודא שאתם סטודנטים בקורס .
-                ולכן מומלץ שאתם תיזמו את האימות.
+                ההרשמה לבוט היא <strong>חד־פעמית</strong> ומטרתה לוודא שאתם סטודנטים בקורס.
+                כפתור פתיחת שיחת הרשמה אוטומטית בוטל, ולכן חשוב שהשיחה הראשונה תיפתח
+                בהודעת אימות עם המייל הארגוני שלכם.
               </p>
               <ol>
                 <li>
@@ -835,104 +736,11 @@
           </div>
         </div>
 
-        <!-- 7 -->
+        <!-- 3 – כללי שימוש והגינות -->
         <div class="section-item">
           <div class="section-header">
             <div class="section-info">
-              <div class="section-title">7. מה קורה בזמן ההרשמה בפועל?</div>
-              <div class="section-desc">שימוש במייל הארגוני, פרטיות ושימוש בנתונים.</div>
-            </div>
-            <button class="section-toggle" type="button">
-              פרטים
-              <span class="arrow">▼</span>
-            </button>
-          </div>
-          <div class="section-body">
-            <div class="section-body-inner">
-              <p>בזמן ההרשמה:</p>
-              <ul>
-                <li>המערכת שומרת את המייל הארגוני שלכם לצורך זיהוי במסגרת הקורס בלבד.</li>
-                <li>המייל משויך לשימוש בבוט לצורך גישה נוחה ודוחות אנונימיים לשיפור ההוראה.</li>
-              </ul>
-              <p>הנתונים:</p>
-              <ul>
-                <li>אינם משמשים לצרכים מסחריים.</li>
-                <li>אינם מועברים לגורמים חיצוניים שאינם קשורים לקורס ולמערכת הלמידה.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8 -->
-        <div class="section-item">
-          <div class="section-header">
-            <div class="section-info">
-              <div class="section-title">8. מתי ההרשמה מתבצעת ומה מקבלים?</div>
-              <div class="section-desc">הרשמה חד־פעמית וגישה חופשית לאורך הסמסטר.</div>
-            </div>
-            <button class="section-toggle" type="button">
-              פרטים
-              <span class="arrow">▼</span>
-            </button>
-          </div>
-          <div class="section-body">
-            <div class="section-body-inner">
-              <p>ההרשמה מתבצעת בפעם הראשונה שבה אתם נכנסים לבוט ומבצעים אימות מייל.</p>
-              <p>לאחר ההרשמה אתם מקבלים:</p>
-              <ul>
-                <li>גישה חופשית לבוט לאורך כל תקופת הקורס.</li>
-                <li>עבודה עם הבוט ללא צורך בהרשמה חוזרת בכל כניסה.</li>
-                <li>אפשרות להשתמש בו לפני שיעור, אחרי שיעור, ובמיוחד כהכנה למבחן.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9 -->
-        <div class="section-item">
-          <div class="section-header">
-            <div class="section-info">
-              <div class="section-title">9. הפעלת זיכרון (Memory) ב-ChatGPT</div>
-              <div class="section-desc">שיפור רציפות השיחה והתאמה להעדפות הלמידה שלכם.</div>
-            </div>
-            <button class="section-toggle" type="button">
-              פרטים
-              <span class="arrow">▼</span>
-            </button>
-          </div>
-          <div class="section-body">
-            <div class="section-body-inner">
-              <p>
-                ניתן להפעיל את אפשרות ה-<strong>Memory</strong> ב-ChatGPT, כדי שהמערכת תזכור העדפות כלליות:
-                למשל שאתם סטודנטים בקורס הסטטיסטיקה, שאתם מעדיפים הסברים “שלב־אחר־שלב” ועוד.
-              </p>
-              <p>כאשר הזיכרון פעיל:</p>
-              <ul>
-                <li>לא תצטרכו להזכיר בכל שיחה מחדש את אותן העדפות.</li>
-                <li>התשובות ינסו להיות מותאמות יותר לסגנון הלמידה שלכם.</li>
-              </ul>
-              <p><strong>ההפעלה אינה חובה</strong> – מי שמעדיף/ה לעבוד בלי זיכרון יכול/ה להשתמש בבוט כרגיל.</p>
-              <p><strong>איך מפעילים?</strong></p>
-              <ol>
-                <li>נכנסים ל-ChatGPT ומתחברים.</li>
-                <li>נכנסים ל-Settings → Memory (או זיכרון).</li>
-                <li>מפעילים את האפשרות (On).</li>
-                <li>אפשר לשתף את המערכת בדברים שחשוב לכם שתזכור (בהסכמתכם).</li>
-                <li>ניתן בכל רגע למחוק זיכרונות או לכבות את האפשרות.</li>
-              </ol>
-              <div class="footnote">
-                שימוש בזיכרון יכול לשפר את תחושת ה"ליווי המתמשך", אבל אינו משנה את כללי ההגינות האקדמית
-                ואינו מפחית מהאחריות האישית של כל סטודנט/ית לתוצאות הלמידה.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 10 -->
-        <div class="section-item">
-          <div class="section-header">
-            <div class="section-info">
-              <div class="section-title">10. כללי שימוש, הגינות ואזהרות AI</div>
+              <div class="section-title">3. כללי שימוש, הגינות ואזהרות AI</div>
               <div class="section-desc">מה כן לעשות עם הבוט – ומה לא.</div>
             </div>
             <button class="section-toggle" type="button">
@@ -972,6 +780,216 @@
             </div>
           </div>
         </div>
+
+        <!-- 4 – מה זה GaliBot ולמה הוא נועד? -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">4. מה זה GaliBot ולמה הוא נועד?</div>
+              <div class="section-desc">עוזר למידה דיגיטלי, מותאם לקורס הסטטיסטיקה.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                GaliBot הוא <strong>עוזר למידה דיגיטלי</strong> שנבנה במיוחד עבור הסטודנטים בקורס הסטטיסטיקה.
+                הוא לא מחליף שיעור, תרגול או קריאת חומר – אלא מוסיף שכבת תמיכה:
+              </p>
+              <ul>
+                <li>שאלות חופשיות על החומר התאורטי, המצגות והתרגולים.</li>
+                <li>הסברים חלופיים ברמות קושי שונות – החל מהסבר בסיסי (כמו לתלמיד/ת תיכון) ועד רמה אקדמית מתקדמת.</li>
+                <li>תרגול שאלות בסגנון המבחן (רב־ברירה עם 4 מסיחים).</li>
+                <li>משוב מיידי על תשובותיכם וחידוד נקודות חלשות.</li>
+                <li>תרגול גם של <strong>היגיון סטטיסטי</strong> וגם של <strong>חישובים</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 – היכן נמצא הבוט -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">5. היכן נמצא הבוט וכיצד ניגשים אליו?</div>
+              <div class="section-desc">קישור במייל + קישור קבוע ב-Moodle.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>לבוט ניתן לגשת בשתי דרכים עיקריות:</p>
+              <ol>
+                <li><strong>קישור במייל</strong> – תקבלו מייל רשמי עם קישור ישיר ל-GaliBot.</li>
+                <li><strong>קישור קבוע ב-Moodle</strong> – בדף הקורס יופיע קישור קבוע לבוט (למשל כפתור “בוט סטטיסטיקה – כניסה”).</li>
+              </ol>
+              <p>מומלץ:</p>
+              <ul>
+                <li>לשמור את הקישור במועדפים בדפדפן,</li>
+                <li>או להיכנס דרך ה-Moodle, כדי שתמיד תדעו מאיפה להתחיל.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 – GaliBot בתוך ChatGPT -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">6. GaliBot בתוך ChatGPT ומה הקשר למנוי?</div>
+              <div class="section-desc">GPT ייעודי לקורס מבוא לסטטיסטיקה– ללא תלות במנוי שלכם.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                GaliBot פועל בתוך ממשק <strong>ChatGPT</strong> של OpenAI, באזור ה-<strong>GPTs</strong>
+                (בוטים ייעודיים מותאמים).
+              </p>
+              <p>חשוב לדעת:</p>
+              <ul>
+                <li>השימוש בו <strong>לא תלוי</strong> בסוג המנוי האישי שלכם ל-ChatGPT.</li>
+                <li>אפשר להשתמש בו גם עם חשבון חינמי, ואין צורך במנוי Plus.</li>
+              </ul>
+              <p>
+                 השימוש בבוט הוא רק בנושאי וצורכי הקורס.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 – נעיצת GaliBot -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">7. נעיצת GaliBot בסרגל הצד של ChatGPT</div>
+              <div class="section-desc">גישה מהירה לבוט מתוך רשימת ה-GPTs.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>כדי שיהיה לכם קל לחזור לבוט בכל רגע:</p>
+              <ol>
+                <li>היכנסו ל-GaliBot דרך הקישור שקיבלתם או דרך ה-Moodle.</li>
+                <li>בצד שמאל (ברשימת ה-GPTs), מצאו את GaliBot.</li>
+                <li>לחצו על האפשרות לנעיצה / מועדף (Pin / Star / Favorite, בהתאם לממשק).</li>
+              </ol>
+              <p>לאחר הנעיצה:</p>
+              <ul>
+                <li>GaliBot יופיע קבוע בסרגל הצד.</li>
+                <li>פתיחת הבוט תהפוך ללחיצה אחת בלבד.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 – מה קורה בזמן ההרשמה בפועל -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">8. מה קורה בזמן ההרשמה בפועל?</div>
+              <div class="section-desc">שימוש במייל הארגוני, פרטיות ושימוש בנתונים.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>בזמן ההרשמה:</p>
+              <ul>
+                <li>המערכת שומרת את המייל הארגוני שלכם לצורך זיהוי במסגרת הקורס בלבד.</li>
+                <li>המייל משויך לשימוש בבוט לצורך גישה נוחה ודוחות אנונימיים לשיפור ההוראה.</li>
+              </ul>
+              <p>הנתונים:</p>
+              <ul>
+                <li>אינם משמשים לצרכים מסחריים.</li>
+                <li>אינם מועברים לגורמים חיצוניים שאינם קשורים לקורס ולמערכת הלמידה.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 – מתי ההרשמה מתבצעת -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">9. מתי ההרשמה מתבצעת ומה מקבלים?</div>
+              <div class="section-desc">הרשמה חד־פעמית וגישה חופשית לאורך הסמסטר.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>ההרשמה מתבצעת בפעם הראשונה שבה אתם נכנסים לבוט ומבצעים אימות מייל.</p>
+              <p>לאחר ההרשמה אתם מקבלים:</p>
+              <ul>
+                <li>גישה חופשית לבוט לאורך כל תקופת הקורס.</li>
+                <li>עבודה עם הבוט ללא צורך בהרשמה חוזרת בכל כניסה.</li>
+                <li>אפשרות להשתמש בו לפני שיעור, אחרי שיעור, ובמיוחד כהכנה למבחן.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 – Memory -->
+        <div class="section-item">
+          <div class="section-header">
+            <div class="section-info">
+              <div class="section-title">10. הפעלת זיכרון (Memory) ב-ChatGPT</div>
+              <div class="section-desc">שיפור רציפות השיחה והתאמה להעדפות הלמידה שלכם.</div>
+            </div>
+            <button class="section-toggle" type="button">
+              פרטים
+              <span class="arrow">▼</span>
+            </button>
+          </div>
+          <div class="section-body">
+            <div class="section-body-inner">
+              <p>
+                ניתן להפעיל את אפשרות ה-<strong>Memory</strong> ב-ChatGPT, כדי שהמערכת תזכור העדפות כלליות:
+                למשל שאתם סטודנטים בקורס הסטטיסטיקה, שאתם מעדיפים הסברים “שלב־אחר־שלב” ועוד.
+              </p>
+              <p>כאשר הזיכרון פעיל:</p>
+              <ul>
+                <li>לא תצטרכו להזכיר בכל שיחה מחדש את אותן העדפות.</li>
+                <li>התשובות ינסו להיות מותאמות יותר לסגנון הלמידה שלכם.</li>
+              </ul>
+              <p><strong>ההפעלה אינה חובה</strong> – מי שמעדיף/ה לעבוד בלי זיכרון יכול/ה להשתמש בבוט כרגיל.</p>
+              <p><strong>איך מפעילים?</strong></p>
+              <ol>
+                <li>נכנסים ל-ChatGPT ומתחברים.</li>
+                <li>נכנסים ל-Settings → Memory (או זיכרון).</li>
+                <li>מפעילים את האפשרות (On).</li>
+                <li>אפשר לשתף את המערכת בדברים שחשוב לכם שתזכור (בהסכמתכם).</li>
+                <li>ניתן בכל רגע למחוק זיכרונות או לכבות את האפשרות.</li>
+              </ol>
+              <div class="footnote">
+                שימוש בזיכרון יכול לשפר את תחושת ה"ליווי המתמשך", אבל אינו משנה את כללי ההגינות האקדמית
+                ואינו מפחית מהאחריות האישית של כל סטודנט/ית לתוצאות הלמידה.
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1008,7 +1026,7 @@
                   <button class="copy-btn" data-copy-target="pbasic-1">העתק</button>
                   <p id="pbasic-1" class="prompt-text">
 תסביר/י לי מה זה ממוצע וסטיית תקן בשפה פשוטה,
-כאילו אני ילד בכיתה ה'. תן/י גם דוגמה מספרית קצרה.
+כאילו אני תלמיד/ת תיכון בתחילת קורס סטטיסטיקה. תן/י גם דוגמה מספרית קצרה.
                   </p>
                 </div>
               </div>
@@ -1595,7 +1613,7 @@
                 <button class="copy-btn" data-copy-target="pskel-2">העתק</button>
                 <p id="pskel-2" class="prompt-text">
 אני רוצה להבין מה זה התפלגות אסימטרית ימנית.
-תסביר/י לי שלב־אחר־שלב, בשפה פשוטה (אפשר "כמו לילד בן 10"),
+תסביר/י לי שלב־אחר־שלב, בשפה פשוטה (ברמה בסיסית, כמו לתלמיד/ת תיכון),
 עם דוגמה מספרית אחת ודימוי מחיי היום־יום.
 בסוף תסכם/י את העיקר ב-3 שורות.
                 </p>
@@ -1765,6 +1783,3 @@
   </script>
 </body>
 </html>
-
-
-
